@@ -1,16 +1,51 @@
-# Tauri + Vue 3 + TypeScript
+# Ultimate Overlay
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This is a stream overlay for Super Smash Bros. It is built with Tauri, Vue and Vuetify, and works on Windows, Linux and MacOS. You can create your own Overlays with it as long as you are able to write html code.
 
-## Recommended IDE Setup
+## Installation
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+Download the latest Version from the [Releases Page](https://github.com/x1rom/ultimate-overlay/releases), and unpack the archive. For Windows, execute the setup.exe file. It will install the overlay and all dependencies. For Linux, simply execute the .appimage file. For MacOS users, you will have to compile the program on your own, as i do not own an Apple device.
 
-## Type Support For `.vue` Imports in TS
+## Usage
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+In OBS, create a Browser source, and set the appropriate resolution. Then select the overlay.html file in the overlays folder. It should work out of the Box as long as you have the application open.
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
+## Development Roadmap
 
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+I have planned more features, which i will implement once i have some free time. Here's a list of planned updates:
+
+-   Integration with start.gg API
+-   updated UI
+-   Graphical Overlay creator.
+-   Arbitrary amount of casters
+
+## Create your own overlay
+
+If you know how to write html code, you can create your own overlay. Embed the updateData.js file, which will update the text of elements that have a certain id. Here are the ids you need to set:
+
+```
+score_l
+score_r
+name_l
+name_r
+tournament_name
+round_name
+caster1
+caster2
+```
+
+## Write your own JS code.
+
+You can write your own code if you want to. The Data is provided through a REST service. Send a GET request to localhost:4875/get_data, which will return the following object:
+
+```TS
+{
+    score_l: number,
+    score_r: number,
+    name_l: string,
+    name_r: string,
+    tournament_name: string,
+    round_name: string,
+    casters: string[],
+}
+```
